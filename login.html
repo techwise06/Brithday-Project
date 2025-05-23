@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register</title>
+
+    <style>
+     body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #bcbdbe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Use min-height */
+      margin: 0;
+    }
+  
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
+    }
+  
+    form input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      transition: border 0.2s;
+    }
+  
+    form input:focus {
+      border-color: #0072ff;
+      outline: none;
+    }
+  
+    button {
+      background: #0072ff;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+  
+    button:hover {
+      background: #005ecb;
+    }
+  
+    #message {
+      margin-top: 15px;
+      color: rgb(31, 151, 10);
+      font-weight: bold;
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+      /* Remove fixed top position */
+      color: #e91616;
+      margin-bottom: 20px; /* Add margin below h2 if inside form */
+    }
+    #terms{
+     color: red;
+     bottom: 100px;
+     width: 15px;
+     height:15px;
+       
+    }
+     
+        
+    </style>
+    
+  </head>
+
+
+  
+  <body>
+  
+    <form id="registerForm">
+      <h2>Restricted Register</h2> <input type="text" id="name" placeholder="Name" required /><br />
+      <input type="text" id="code" placeholder="Secret Code" required /><br />
+      <input type="email" id="email" placeholder="Email" required /><br />
+      <input type="password" id="password" placeholder="Password" required /><br />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required /><br />
+      <input type="checkbox" id="terms" required />
+      <button type="submit">Register</button>
+      <div id="message"></div>
+    </form>     
+
+    <p id="message"></p>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+
+    <script>
+      // Firebase Config
+
+      const firebaseConfig = {
+      apiKey: "AIzaSyAnuoXOvtmio7N4GzjwydaPMHZPaQVTbC4",
+      authDomain: "techwise-register.firebaseapp.com",
+      projectId: "techwise-register",
+      storageBucket: "techwise-register.firebasestorage.app",
+      messagingSenderId: "236050629548",
+      appId: "1:236050629548:web:7f04feb25f60ceccdf3009"
+    
+          
+        // apiKey: import.meta.env.VITE_API_KEY,
+        // authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+        // projectId: import.meta.env.VITE_PROJECT_ID,
+        // storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+        // messagingSenderId: import.meta.env.VITE_MESSAGE_SENDER_ID,
+        // appId: import.meta.env.VITE_APP_ID,
+      
+
+      // ... other config
+
+      
+      };
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+
+      const allowedUsers = [
+        { name: "Aung Htet Myat Soe", code: "TECH123" },
+        { name: "May Sander Soe", code: "MAY456" },
+      ];
+
+      document.getElementById("registerForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const code = document.getElementById("code").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        const matched = allowedUsers.find(
+          (user) => user.name === name && user.code === code
+        );
+
+
+        
+        if (!matched) {
+          document.getElementById("message").innerText = "❌ Name or code not allowed.";
+          return;
+        }
+
+
+
+        try {
+          await auth.createUserWithEmailAndPassword(email, password);
+          document.getElementById("message").innerText = "✅ Registered Successfully!";
+
+          setTimeout(() => {
+          window.location.href = "index.html"; // တကယ်အောင်မြင်မှ သွားပါ
+        }, 2000);
+
+        } catch (error) {
+          document.getElementById("message").innerText = "⚠️ " + error.message;
+        }
+      });
+
+
+       
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday My Friend 💖</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Custom Navbar Styles */
+   /* Custom Navbar Styles */
+   .navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(30deg, rgba(0, 0, 0, 0.1), rgb(66, 30, 62)); /* Slightly opaque start */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .navbar-brand {
+    font-family: 'Cursive', sans-serif;
+    font-size: 1.5rem;
+    color: #ffdd99 !important;
+    transition: color 0.3s ease;
+  }
+  .nav-link {
+     
+    color: #fff !important;
+     
+    transition: color 0.3s ease;
+    
+  }
+  .nav-link:hover {
+    color: #ffdd99 !important;
+  }
+  .navbar-toggler {
+    border: none;
+    background-color: rgb(66, 30, 62);
+  }
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+    /* Custom Navbar Styles */
+    .gallery-img {
+      width: 85%;
+      height: auto;
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+      z-index: 2;
+    }
+
+    .gallery-item {
+      padding: 15px;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+    }
+    /* Custom Navbar Styles */
+
+  </style>
+</head>
+<body class="bg-dark text-white text-center d-flex flex-column justify-content-center align-items-center" style="height:100vh">
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">🎂 Birthday Gift</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+              <li class="nav-item"><a class="nav-link" href="musica.html">Music</a></li>
+              <li class="nav-item"><a class="nav-link" href="video.html">Video</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-3">Happy Birthday 💫</h1>
+      <p class="lead">To my dearest online best friend,<br>May your day be filled with love, laughter, and endless joy. 💐</p>
+      <p class="fst-italic">You mean so much to me. This small website is just a tiny gift to show how special you are.</p>
+      <a href="gallery.html" class="btn btn-outline-light mt-4">See Memories 📸</a>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
