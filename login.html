@@ -6,7 +6,7 @@
     <style>
      body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #00c6ff, #bcbdbe);
+      background: linear-gradient(to bottom, #834892dc, #375454);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,7 +15,9 @@
     }
   
     form {
-      background: #fff;
+      background: transparent ;
+         
+      
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -30,17 +32,20 @@
       margin-top: 15px;
       font-size: 16px;
       border-radius: 6px;
-      border: 1px solid #ccc;
-      transition: border 0.2s;
+      border: 1px solid #ffae17;
+      transition: border 0.3s ease, box-shadow 0.2s ease; 
     }
   
     form input:focus {
       border-color: #0072ff;
       outline: none;
+      box-shadow: 0 10px 25px rgba(135, 164, 216, 0.648);
+
+
     }
   
     button {
-      background: #0072ff;
+      background: rgb(208, 179, 13);
       color: #fff;
       border: none;
       padding: 12px;
@@ -53,7 +58,7 @@
     }
   
     button:hover {
-      background: #005ecb;
+      background: #092a94;
     }
   
     #message {
@@ -65,10 +70,14 @@
 
     h2 {
       text-align: center;
+      font-size: 28px;
       /* Remove fixed top position */
-      color: #e91616;
-      margin-bottom: 20px; /* Add margin below h2 if inside form */
+      color: #fdb600;
+      margin-bottom:15px; /* Add margin below h2 if inside form */
+      text-shadow:1px 1px 2px rgb(40, 39, 36);
     }
+
+
     #terms{
      color: red;
      bottom: 100px;
@@ -131,8 +140,8 @@
       const auth = firebase.auth();
 
       const allowedUsers = [
-        { name: "Aung Htet Myat Soe", code: "TECH123" },
-        { name: "May Sander Soe", code: "MAY456" },
+        { name: "Aung Htet Myat Soe", code: "TECH123"},
+        { name: "May Sander Soe", code:"MAY456"},
       ];
 
       document.getElementById("registerForm").addEventListener("submit", async (e) => {
@@ -164,6 +173,7 @@
           window.location.href = "index.html"; // တကယ်အောင်မြင်မှ သွားပါ
         }, 2000);
 
+
         } catch (error) {
           document.getElementById("message").innerText = "⚠️ " + error.message;
         }
@@ -172,5 +182,7 @@
 
        
     </script>
+    
+    
   </body>
 </html>

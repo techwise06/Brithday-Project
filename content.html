@@ -97,6 +97,12 @@
 </head>
 <body class="bg-dark text-white text-center d-flex flex-column justify-content-center align-items-center" style="height:100vh">
 
+
+
+
+
+
+
  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">🎂 Birthday Gift</a>
@@ -109,7 +115,7 @@
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="musica.html">Music</a></li>
-          <li class="nav-item"><a class="nav-link" href="video.html">Video</a></li>
+          <li class="nav-item"><a class="nav-link" href="content.html">Content</a></li>
         </ul>
       </div>
     </div>
@@ -118,13 +124,22 @@
 
   
   <h1>🎉 Happy Birthday May! 🎉</h1>
-<!-- 
-  <div class="video-container">
-    <video controls autoplay>
-     <source src="https://youtu.be/wSGoUSwNb44?si=qDl654diULh2ETV3"/> 
-      Your browser does not support the video tag.
-    </video>
-  </div> -->
+<div class="rotate-text" style="text-align: center; font-size: 1.3rem; color: #fff; margin-top: 30px;">
+  <span id="message">Happy Birthday, Sis 💕</span>
+</div>
+
+<script>
+  const messages = [
+    "Happy Birthday to the best sister!","25 & fabulous 🎉",
+    "Thanks for always being there 💖"
+  ];
+  let i = 0;
+  setInterval(() => {
+    document.getElementById("message").textContent = messages[i];
+    i = (i + 1) % messages.length;
+  }, 3000);
+</script>
+
 
   <div class="btn-group">
     <!-- <a href="musica.html" class="btn btn-outline-light">🎶 Listen to Music</a> -->

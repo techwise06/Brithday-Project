@@ -7,131 +7,219 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #2c003e, #58005c, #8c0070);
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
-    }
+  background: linear-gradient(135deg, #2c003e, #58005c, #8c0070);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  /* height: 100vh;  ဖုန်းအတွက် မလိုအပ်တော့ပါ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* overflow: hidden;  ဖုန်းအတွက် Scrollable ဖြစ်အောင် ဖယ်ထားပါ */
+  min-height: 100vh; /* Content များလာရင် အောက်ကို ဆက်ဆင်းနိုင်ရန် */
+  padding-bottom: 100px; /* အောက်ခြေ button တွေနဲ့ မထိအောင် နေရာပေးပါ */
+}
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+  padding-top: 80px; /* Navbar အောက်မှာ နေရာချရန် */
+}
 
-    .note {
-      font-size: 1.2rem;
-      color: #ffd1ff;
-      margin-bottom: 40px;
-      animation: fadeIn 3s ease-in-out;
-    }
+.note {
+  font-size: 1.2rem;
+  color: #ffd1ff;
+  margin-bottom: 40px;
+  animation: fadeIn 3s ease-in-out;
+}
 
-  .back-btn {
-    position: fixed;
-    bottom: 20px;  
-    left:4.5%;  
-    transform: translateX(-50%);
-    
+/* Fixed positioned buttons for responsiveness */
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* Left side for smaller screens */
+  transform: none; /* Remove translateX */
+  z-index: 1000;
 }
 .next-btn {
   position: fixed;
-  bottom: 40px;
-
-  left: 50%;
-  
-  transform: translateX(-50%);
+  bottom: 20px; /* back-btn နဲ့ တတန်းတည်းထား */
+  right: 20px; /* Right side for smaller screens */
+  left: auto; /* Remove left: 50% */
+  transform: none; /* Remove translateX */
   color: black;
-
+  z-index: 1000;
 }
 
 .next-btn:hover{
   background-color: #ffffff;
-   
 }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
 
-    /* Floating hearts effect (optional) */
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: pink;
-      transform: rotate(45deg);
-      animation: float 5s infinite;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .heart::before,
-    .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: pink;
-      border-radius: 50%;
-    }
+/* Floating hearts effect */
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: pink;
+  transform: rotate(45deg);
+  animation: float 5s infinite;
+  z-index: 0; /* Background layer */
+}
 
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: pink;
+  border-radius: 50%;
+}
 
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
+.heart::before {
+  top: -10px;
+  left: 0;
+}
 
-    @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+.heart::after {
+  left: -10px;
+  top: 0;
+}
 
-      100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
-    }
+@keyframes float {
+  0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+}
 
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
+canvas {
+  position: fixed; /* Fixed position for canvas */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Above hearts, below content */
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
 
-       /* Custom Navbar Styles */
-  .navbar {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    background: linear-gradient(30deg, rgba(0, 0, 0, 0.1), rgb(66, 30, 62)); /* Slightly opaque start */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Custom Navbar Styles */
+.navbar {
+  position: fixed; /* Fixed position for navbar */
+  top: 0;
+  width: 100%;
+  background: linear-gradient(30deg, rgba(0, 0, 0, 0.5), rgb(66, 30, 62)); /* Slightly more opaque for readability */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure navbar is on top */
+}
+.navbar-brand {
+  font-family: 'Cursive', sans-serif;
+  font-size: 1.5rem;
+  color: #ffdd99 !important;
+  transition: color 0.3s ease;
+}
+.nav-link {
+  color: #fff !important;
+  transition: color 0.3s ease;
+}
+.nav-link:hover {
+  color: #ffdd99 !important;
+}
+.navbar-toggler {
+  border: none;
+  background-color: transparent; /* Changed from rgb(66, 30, 62) to transparent */
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Song List and Card Styles */
+.song-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 20px auto; /* Add some top/bottom margin */
+  z-index: 10; /* Ensure song cards are above canvas/hearts */
+  position: relative; /* For z-index to work correctly */
+}
+.song-card {
+  background-color: rgb(255, 192, 203);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 280px;
+  text-align: left;
+  transition: transform 0.2s;
+}
+.song-card:hover {
+  transform: translateY(-5px);
+  background-color: rgb(223, 202, 202);
+}
+.song-card h2 {
+  color: #3e2723;
+  font-size: 22px; /* Slightly adjusted font size for mobile */
+  margin-top: 0;
+  margin-bottom: 10px;
+  white-space: nowrap; /* Prevent title from wrapping awkwardly */
+  overflow: hidden; /* Hide overflow if nowrap causes issues */
+  text-overflow: ellipsis; /* Add ellipsis for hidden text */
+}
+.song-card p {
+  color: #555;
+  font-size: 0.85em; /* Slightly smaller for mobile */
+  margin-bottom: 15px;
+}
+.song-card audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Responsive adjustments for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem; /* Smaller heading on small screens */
+    padding-top: 100px; /* Adjust for fixed navbar height */
   }
-  .navbar-brand {
-    font-family: 'Cursive', sans-serif;
-    font-size: 1.5rem;
-    color: #ffdd99 !important;
-    transition: color 0.3s ease;
+  .note {
+    font-size: 1em;
+    margin-bottom: 20px;
   }
-  .nav-link {
-    color: #fff !important;
-    transition: color 0.3s ease;
+  .song-card {
+    width: 90%; /* Make cards take more width on small screens */
+    max-width: 300px; /* Limit max width for very large phones */
   }
-  .nav-link:hover {
-    color: #ffdd99 !important;
+  .song-list {
+    margin: 20px 10px; /* Add horizontal margin for phones */
+    gap: 15px; /* Slightly smaller gap */
   }
-  .navbar-toggler {
-    border: none;
-    background-color: rgb(66, 30, 62);
+  .back-btn {
+    left: 10px; /* Move closer to edge */
+    bottom: 10px; /* Adjust bottom position */
   }
-  .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  .next-btn {
+    right: 10px; /* Move closer to edge */
+    bottom: 10px; /* Adjust bottom position */
   }
-    /* Custom Navbar Styles */
+   body {
+     padding-bottom: 80px; /* Ensure space for fixed buttons */
+   }
+}
+
+/* Optional: Hide fireworks and hearts on very small devices for performance */
+@media (max-width: 480px) {
+  .heart, canvas {
+    display: none; /* Hide animation for very small screens if performance is an issue */
+  }
+}
+ 
+    
   </style>
 </head>
 <body>
@@ -147,22 +235,76 @@
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="musica.html">Music</a></li>
-          <li class="nav-item"><a class="nav-link" href="video.html">Video</a></li>
+          <li class="nav-item"><a class="nav-link" href="content.html">Content</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <h1>🎶 For You, May 💖</h1>
+  <h1>🎶 For You  💖</h1>
   <p class="note">This song reminds me of you... Happy Birthday!</p>
 
   <!-- Audio Player -->
-  <audio autoplay loop controls>
-    <source src="./audio/happy-birthday-254480.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
 
-  <a href="video.html" class="btn btn-outline-light next-btn  align-items  mt-4">🎥 Watch the Birthday Video</a>
+    <div class="song-list">   
+    <div class="song-card">
+      <h2>Maroon 5 - Memories </h2>     
+      <audio controls class="song-audio">
+          <source src="assets/audio/Maroon 5 - Memories (Lyrics) - 7clouds.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+    </div>  
+    
+    <div class="song-card">
+      <h2> Take Me Home</h2>     
+      <audio controls class="song-audio">
+          <source src="assets/audio/John Denver  Take Me Home, Country Roads Surfhouse.m4a" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+    </div> 
+
+  
+
+
+    <div class="song-card">
+      <h2>Happy Birthday</h2>     
+      <audio controls class="song-audio">
+          <source src="assets/audio/happybrithday2.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+    </div> 
+
+    <div class="song-card">
+      <h2>Happy Birthday</h2>       
+      <audio controls class="song-audio">
+          <source src="assets/audio/Happy birthday (Bulan Sutena cover) lofi remix - Yaaw.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+    </div> 
+
+     
+
+    <div class="song-card">
+      <h2>I Want You to Know </h2>     
+      <audio controls class="song-audio">
+          <source src="assets/audio/I want to you.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+
+    </div> 
+    <div class="song-card">
+      <h2>8 Letters</h2>     
+      <audio controls class="song-audio">
+          <source src="assets/audio/8letters.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+    </div> 
+
+  </div>
+   
+
+
+  <a href="content.html" class="btn btn-outline-light next-btn  align-items  mt-4">  Watch the Birthday</a>
 
   <!-- Floating hearts (you can duplicate more hearts as needed) -->
   <div class="heart" style="left: 20%; animation-delay: 0s;"></div>
@@ -257,10 +399,47 @@
     });
   </script>
 
-    <!-- Add Bootstrap JS and Popper.js -->
+  <script> const allAudioPlayers = document.querySelectorAll('.song-audio');
+    // document ထဲမှာ class="song-audio" ရှိတဲ့ audio player အားလုံးကို ရွေးထုတ်ပြီး allAudioPlayers ဆိုတဲ့ list ထဲမှာ ထည့်တယ်။
+    
+    allAudioPlayers.forEach(player => {
+      // player တစ်ခုချင်းစီကို လှည့်ပတ်ပြီး event listener ထည့်မယ်။
+      player.addEventListener('play', () => {
+        // 'play' event ဖြစ်လာရင် (ဆိုလိုတာက user က သီချင်းဖွင့်လိုက်ရင်)
+        allAudioPlayers.forEach(otherPlayer => {
+          // player list ထဲက တခြား player တွေအားလုံးကို ပြန်စစ်မယ်။
+          if (otherPlayer !== player) {
+            // အခုဖွင့်လိုက်တဲ့ player မဟုတ်ဘဲ တခြား player တစ်ခုခုဆိုရင်
+            otherPlayer.pause(); // အဲဒီ player ကို ရပ်လိုက်ပါ။
+            otherPlayer.currentTime = 0; // (Optional) သီချင်းကို အစအဆုံး ပြန်ရစ်ထားပါ။
+          }
+        });
+      });
+    });
+
+    
+         </script>
+
+<footer>
+  <p  class="life">&copy; Copyright <span  id="autoyear"></span> Tech Wise </p>
+</footer>
+<!-- !-- footerscript --> 
+ <script>
+      // footer 
+      const  autoyear = document.getElementById('autoyear');
+      const getyear = new Date().getUTCFullYear();
+      autoyear.textContent = getyear;
+
+//footer 
+ </script>
+<!-- Add Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
 
 
 </html>
+
+
+
+ 
